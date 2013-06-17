@@ -3,12 +3,20 @@
 #Les valeurs extraites sont stockées dans un fichier texte et on affiche en console un classement (valeurs affichées dans l'ordre décroissant)
 #Le système récupère maintenant le pseudo de la personne qui a posté le post.Le système récupère maintenant le pseudo de la personne qui a posté le post. On a alors un classement à deux colonnes avec le nombre de vote, et le pseudo de la personne ayant posté le post.
 
-#!/bin/sh
+#!/bin/bash
+if [ -d "www.viedemerde.fr" ] #On vérifie si le dossier www.viedemerde.fr existe déjà 
+then
+echo "Le contenu du site est déjà disponible dans le répertoire actuel "
+else
+echo "Nous téléchargeons le contenu du site Vie de Merde, veuillez patienter svp "
+wget -r http://www.viedemerde.fr # Si le dossier n'existe pas permet de télécharger tout le contenu du site "Vie de merde" dans un répertoire nommé "www.viedemerde.fr"
+fi
+
 echo "Entrez le nom d'une catégorie: " #On affiche à l'écran le texte indiqué qui invite l'utilisateur à entrer le nom d'une catégorie
 read word #On récupère la catégorie entrée par l'utilisateur
  while true; do
   case $word in # teste les entrées
-  "argent" | "amour" | "travail" | "animaux")  # contrôle les catégories
+  ("argent" | "amour" | "travail" | "animaux")  # contrôle les catégories
 cd www.viedemerde.fr/$word # On se place dans le répertoire www.viedemerde.fr et ensuite dans le répertoire correspondant à la catégorie choisie
 echo 'Voici les résultats de la catégorie '$word ;
    break;; # arrete la boucle
